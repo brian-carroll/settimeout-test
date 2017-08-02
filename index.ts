@@ -29,6 +29,12 @@ function inactivityDetected() {
     displayLog('Inactivity detected');
 }
 
+function switchBackToTab() {
+    displayLog('User switched back to this tab');
+    checkActivityStatus();
+}
+
+
 //________________________________________________________________________________________________________________
 
 
@@ -65,7 +71,6 @@ function twoDigits(n) {
 
 activityDetected();  // initialise
 document.body.addEventListener("click", activityDetected);
-window.onfocus = () => {
-    displayLog('window.onfocus');
-    checkActivityStatus();
-}
+window.onfocus = switchBackToTab;
+window.onpageshow = switchBackToTab;
+document.addEventListener('visibilitychange', switchBackToTab);

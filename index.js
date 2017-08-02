@@ -26,6 +26,10 @@ function inactivityDetected() {
     activityExpiryTimeStamp = null;
     displayLog('Inactivity detected');
 }
+function switchBackToTab() {
+    displayLog('User switched back to this tab');
+    checkActivityStatus();
+}
 //________________________________________________________________________________________________________________
 var logDomElement = document.getElementById('log');
 function displayLog(msg) {
@@ -51,7 +55,6 @@ function twoDigits(n) {
 //________________________________________________________________________________________________________________
 activityDetected(); // initialise
 document.body.addEventListener("click", activityDetected);
-window.onfocus = function () {
-    displayLog('window.onfocus');
-    checkActivityStatus();
-};
+window.onfocus = switchBackToTab;
+window.onpageshow = switchBackToTab;
+document.addEventListener('visibilitychange', switchBackToTab);

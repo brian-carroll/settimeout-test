@@ -71,6 +71,6 @@ function twoDigits(n) {
 
 activityDetected();  // initialise
 document.body.addEventListener("click", activityDetected);
-window.onfocus = switchBackToTab;
-window.onpageshow = switchBackToTab;
+// window.onfocus = switchBackToTab;
+// window.onpageshow = switchBackToTab;
 document.addEventListener('visibilitychange', switchBackToTab);

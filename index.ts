@@ -1,3 +1,5 @@
+const fileVersion = 5;
+
 const timeoutDelayMs = 1000*60*0.5;  // 25 mins
 const checkIntervalMs = 1000*5;
 
@@ -69,6 +71,7 @@ function twoDigits(n) {
 
 //________________________________________________________________________________________________________________
 
+displayLog('File version: ' + fileVersion);
 activityDetected();  // initialise
 document.body.addEventListener("click", activityDetected);
 // window.onfocus = switchBackToTab;

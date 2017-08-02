@@ -1,3 +1,4 @@
+var fileVersion = 5;
 var timeoutDelayMs = 1000 * 60 * 0.5; // 25 mins
 var checkIntervalMs = 1000 * 5;
 var timerID = null;
@@ -53,8 +54,9 @@ function twoDigits(n) {
     return ('0' + n).slice(-2);
 }
 //________________________________________________________________________________________________________________
+displayLog('File version: ' + fileVersion);
 activityDetected(); // initialise
 document.body.addEventListener("click", activityDetected);
-window.onfocus = switchBackToTab;
-window.onpageshow = switchBackToTab;
+// window.onfocus = switchBackToTab;
+// window.onpageshow = switchBackToTab;
 document.addEventListener('visibilitychange', switchBackToTab);

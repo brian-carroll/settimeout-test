@@ -1,24 +1,26 @@
-var timeoutDelayMs = 1000 * 60 * 0.5; // 25 mins
-var checkIntervalMs = 1000 * 5;
-var timerID = null;
-var activityExpiryTimeStamp = null;
+const timeoutDelayMs = 1000*60*0.5;  // 25 mins
+const checkIntervalMs = 1000*5;
+
+let timerID = null;
+let activityExpiryTimeStamp = null;
+
 function activityDetected() {
     activityExpiryTimeStamp = Date.now() + timeoutDelayMs;
     checkActivityStatus();
     displayLog('Activity detected');
 }
+
 function checkActivityStatus() {
     displayLog('Checking activity status');
     clearTimeout(timerID);
-    if (!activityExpiryTimeStamp)
-        return;
+    if (!activityExpiryTimeStamp) return;
     if (Date.now() >= activityExpiryTimeStamp) {
         inactivityDetected();
-    }
-    else {
+    } else {
         timerID = setTimeout(checkActivityStatus, checkIntervalMs);
     }
 }
+
 function inactivityDetected() {
     // No need to keep checking
     clearTimeout(timerID);
@@ -26,16 +28,24 @@ function inactivityDetected() {
     activityExpiryTimeStamp = null;
     displayLog('Inactivity detected');
 }
+
 //________________________________________________________________________________________________________________
-var logDomElement = document.getElementById('log');
+
+
+const logDomElement = document.getElementById('log');
+
+
 function displayLog(msg) {
-    var now = new Date();
-    var logMessage = timeFormat(now) + ' | ' + timeFormat(activityExpiryTimeStamp) + ' | ' + msg;
-    var listItem = document.createElement('li');
-    var textNode = document.createTextNode(logMessage);
+    const now = new Date();
+    const logMessage = timeFormat(now) + ' | ' + timeFormat(activityExpiryTimeStamp) + ' | ' + msg;
+
+    const listItem = document.createElement('li');
+    const textNode = document.createTextNode(logMessage);
     listItem.appendChild(textNode);
     logDomElement.appendChild(listItem);
 }
+
+
 function timeFormat(date) {
     if (!date) {
         return date;
@@ -45,13 +55,17 @@ function timeFormat(date) {
     }
     return date.getHours() + ':' + twoDigits(date.getMinutes()) + ':' + twoDigits(date.getSeconds());
 }
+
 function twoDigits(n) {
     return ('0' + n).slice(-2);
 }
+
+
 //________________________________________________________________________________________________________________
-activityDetected(); // initialise
+
+activityDetected();  // initialise
 document.body.addEventListener("click", activityDetected);
-window.onfocus = function () {
+window.onfocus = () => {
     displayLog('window.onfocus');
     checkActivityStatus();
-};
+}

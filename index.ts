@@ -32,7 +32,7 @@ function inactivityDetected() {
 }
 
 function switchBackToTab() {
-    displayLog('User switched back to this tab');
+    displayLog('User switched tab');
     checkActivityStatus();
 }
 
